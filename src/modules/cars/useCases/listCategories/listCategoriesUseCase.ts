@@ -5,16 +5,16 @@ import { ICategoriesRepository } from "@modules/cars/repositories/ICategoriesRep
 
 @injectable()
 class ListCategoriesUseCase {
-    constructor(
-        @inject("CategoriesRepository")
-        private categoriesRepository: ICategoriesRepository
-    ) {}
+  constructor(
+    @inject("CategoriesRepository")
+    private categoriesRepository: ICategoriesRepository
+  ) {}
 
-    async execute(): Promise<Category[]> {
-        const categories = await this.categoriesRepository.list();
+  async execute(): Promise<Category[]> {
+    const categories = await this.categoriesRepository.list();
 
-        return categories;
-    }
+    return categories;
+  }
 }
 
 export { ListCategoriesUseCase };

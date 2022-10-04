@@ -8,46 +8,46 @@ import createConnection from "@shared/infra/typeorm";
 
 let connection: Connection;
 describe("List Categories Controller", () => {
-    beforeAll(async () => {
-        connection = await createConnection();
-        await connection.runMigrations();
+  beforeAll(async () => {
+    connection = await createConnection();
+    await connection.runMigrations();
 
-        const id = uuid();
-        const password = await hash("admin", 8);
+    const id = uuid();
+    const password = await hash("admin", 8);
 
-        await connection.query(
-            `INSERT INTO USERS(id, name, email, password, "isAdmin", created_at, driver_license)
+    await connection.query(
+      `INSERT INTO USERS(id, name, email, password, "isAdmin", created_at, driver_license)
             values('${id}', 'admin', 'admin@rentx.com.br', '${password}', true, 'now()', 'XXXXXX')
         `
-        );
+    );
+  });
+
+  afterAll(async () => {
+    await connection.dropDatabase();
+    await connection.close();
+  });
+
+  it("should be able to list all categories", async () => {
+    const responseToken = await request(app).post("/sessions").send({
+      email: "admin@rentx.com.br",
+      password: "admin",
     });
 
-    afterAll(async () => {
-        await connection.dropDatabase();
-        await connection.close();
-    });
+    const { token } = responseToken.body;
 
-    it("should be able to list all categories", async () => {
-        const responseToken = await request(app).post("/sessions").send({
-            email: "admin@rentx.com.br",
-            password: "admin",
-        });
+    await request(app)
+      .post("/categories")
+      .send({
+        name: "Caregory Supertest",
+        description: "Caregory Supertest",
+      })
+      .set({
+        Authorization: `Bearer ${token}`,
+      });
 
-        const { token } = responseToken.body;
+    const response = await request(app).get("/categories");
 
-        await request(app)
-            .post("/categories")
-            .send({
-                name: "Caregory Supertest",
-                description: "Caregory Supertest",
-            })
-            .set({
-                Authorization: `Bearer ${token}`,
-            });
-
-        const response = await request(app).get("/categories");
-
-        expect(response.status).toBe(200);
-        expect(response.body.length).toBe(1);
-    });
+    expect(response.status).toBe(200);
+    expect(response.body.length).toBe(1);
+  });
 });
