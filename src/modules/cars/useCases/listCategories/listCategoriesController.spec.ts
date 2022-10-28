@@ -38,8 +38,8 @@ describe("List Categories Controller", () => {
     await request(app)
       .post("/categories")
       .send({
-        name: "Caregory Supertest",
-        description: "Caregory Supertest",
+        name: "Category Supertest",
+        description: "Category Supertest",
       })
       .set({
         Authorization: `Bearer ${token}`,
