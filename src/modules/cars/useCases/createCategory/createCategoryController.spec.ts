@@ -14,7 +14,6 @@ describe("Create Category Controller", () => {
 
     const id = uuid();
     const password = await hash("admin", 8);
-    console.log("chegou aq");
 
     await connection.query(
       `INSERT INTO USERS(id, name, email, password, "isAdmin", created_at, driver_license)
@@ -39,8 +38,8 @@ describe("Create Category Controller", () => {
     const response = await request(app)
       .post("/categories")
       .send({
-        name: "Caregory Supertest",
-        description: "Caregory Supertest",
+        name: "Category Supertest",
+        description: "Category Supertest",
       })
       .set({
         Authorization: `Bearer ${refresh_token}`,
@@ -60,8 +59,8 @@ describe("Create Category Controller", () => {
     const response = await request(app)
       .post("/categories")
       .send({
-        name: "Caregory Supertest",
-        description: "Caregory Supertest",
+        name: "Category Supertest",
+        description: "Category Supertest",
       })
       .set({
         Authorization: `Bearer ${refresh_token}`,
