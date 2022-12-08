@@ -1,59 +1,96 @@
-# Car registration
+# Cadastro de carro
 
-**FR**
-It must be possible to register a new car.
-
-**BR**
-It should not be possible to register a car with an existing license plate.
-The car must be registered, by default, with availability.
-The user responsible for the registration must be an administrator user.
+**RF**
+- Deve ser possível cadastrar um novo carro.
 
 
-# Car listing
+**RN** 
+- Não deve ser possível cadastrar um carro com uma placa já existente.
+- O carro deve ser cadastrado, por padrão, com disponibilidade.
+- O usuário responsável pelo cadastro deve ser um usuário administrador.
 
-**FR**
-It should be possible to list all available cars.
-It should be possible to list all available cars by category name.
-It should be possible to list all available cars by brand name.
-It should be possible to list all available cars by car name.
+# Listagem de carros
 
-**BR**
-The user does not need to be logged into the system.
+**RF** 
+- Deve ser possível listar todos os carros disponíveis
+- Deve ser possível listar todos os carros disponíveis pelo - nome da categoria
+- Deve ser possível listar todos os carros disponíveis pelo - nome da marca
+- Deve ser possível listar todos os carros disponíveis pelo - nome do carro
 
-
-# Specification registration on the car
-
-**FR**
-It must be possible to register a specification for a car.
-It should be possible to list all specifications.
-It should be possible to list all cars.
-
-**BR**
-It should be possible to register a specification for an unregistered car.
-It should not be possible to register an existing specification for the same car.
-The user responsible for the registration must be an administrator user.
+**RN**
+- O usuário não precisar estar logado no sistema.
 
 
-# Car image registration
+# Cadastro de Especificação no carro
 
-**FR**
-It must be possible to register the image of the car.
-It should be possible to list all cars.
+**RF**
+- Deve ser possível cadastrar uma especificação para um carro
+
+
+**RN**
+- Não deve ser possível cadastrar uma especificação para um - carro não cadastrado.
+- Não deve ser possível cadastrar uma especificação já - existente para o mesmo carro.
+- O usuário responsável pelo cadastro deve ser um usuário - administrador.
+
+
+# Cadastro de imagens do carro
+
+**RF**
+- Deve ser possível cadastrar a imagem do carro
 
 **RNF**
-Use multer to upload files.
+- Utilizar o multer para upload dos arquivos
 
-**BR**
-The user must be able to register more than one image for the same car.
-The user responsible for the registration must be an administrator user.
+**RN**
+- O usuário deve poder cadastrar mais de uma imagem para o - mesmo carro
+- O usuário responsável pelo cadastro deve ser um usuário - administrador.
 
 
-# Car rental
+# Alugel de carro
 
-**FR**
-It must be possible to register a rental.
+**RF**
+- Deve ser possível cadastrar um aluguel
 
-**BR**
-The rental must have a minimum duration of 24 hours.
-It should not be possible to register a new lease if there is already one open for the same user.
-It should not be possible to register a new rental if there is already one open for the same car.
+
+**RN**
+- O aluguel deve ter duração mínima de 24 horas.
+- Não deve ser possível cadastrar um novo aluguel caso já - exista um aberto para o mesmo usuário
+- Não deve ser possível cadastrar um novo aluguel caso já - exista um aberto para o mesmo carro
+- O usuário deve estar logado na aplicação
+- Ao realizar um aluguel, o status do carro deverá ser - alterado para indisponível
+
+
+# Devolução de carro 
+
+**RF**
+- Deve ser possível realizar a devolução de um carro
+
+**RN**
+- Se o carro for devolvido com menos de 24 horas, deverá - ser cobrado diária completa.
+- Ao realizar a devolução, o carro deverá ser liberado para - outro aluguel.
+- Ao realizar a devolução, o usuário deverá ser liberado - para outro aluguel.
+- Ao realizar a devolução, deverá ser calculado o total do - aluguel. 
+- Caso o horário de devolução seja superior ao horário - previsto de entrega, deverá ser cobrado multa - proporcional aos dias de atraso.
+- Caso haja multa, deverá ser somado ao total do aluguel.
+- O usuário deve estar logado na aplicação
+
+
+# Listagem de Alugueis para usuário
+
+**RF**
+- Deve ser possível realizar a busca de todos os alugueis para o usuário
+
+**RN**
+- O usuário deve estar logado na aplicação
+
+
+# Recuperar Senha
+
+**RF**
+- Deve ser possível o usuário recuperar a senha informando o e-mail
+- O usuário deve receber um e-mail com o passo a passo para a recuperação da senha
+- O usuário deve conseguir inserir uma nova senha
+
+**RN**
+- O usuário precisa informar uma nova senha
+- O link enviado para a recuperação deve expirar em 3 horas
